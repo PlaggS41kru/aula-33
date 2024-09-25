@@ -1,22 +1,9 @@
 const express = require("express");
+const videosController = require("../controllers/videosController");
 const router = express.Router();
-const dados = require("../mock/dados.json");
 
 // Rota para listar todos os vídeos
-router.get("/", (req, res) => {
-  try {
-    const videos = dados.videos;
-
-    if (videos.length > 0) {
-      res.status(200).json(videos);
-    } else {
-      res.status(404).json({ mensagem: "Nenhum vídeo encontrado" });
-    }
-  } catch (erro) {
-    res.status(500).json({ mensagem: "Erro ao buscar vídeos", detalhes: erro.message });
-  }
-});
-
+router.get("/", videosController.index);
 // Rota para buscar um vídeo pelo ID
 router.get("/:id", (req, res) => {
   try {
